@@ -5,6 +5,7 @@ import life.majiang.community.entity.GithubUser;
 import life.majiang.community.entity.User;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.provider.GithubProvider;
+import life.majiang.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,7 @@ public class AuthorizeController {
     private GithubProvider githubProvider;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Value("${github.client.id}")
     private String clientId;
@@ -51,7 +52,7 @@ public class AuthorizeController {
         GithubUser githubUser = githubProvider.getUser(accessToken1);
         System.out.println(githubUser);
 
-        if(githubUser != null){
+        if(githubUser != null && githubUser.getId() != null){
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
@@ -59,7 +60,7 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
-            userMapper.insert(user);
+            userService.insert(user);
             //登录成功 写入cookie和session
             response.addCookie(new Cookie("token",token));
 //            request.getSession().setAttribute("user",user);
