@@ -9,4 +9,8 @@ public interface UserService {
     void insert(User user);
 
     User finByToken(String token);
+
+    User findById(Integer id);
+
+    void createOrUpdate(User user);
 }

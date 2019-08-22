@@ -3,7 +3,7 @@ server:
 github:
   client:
     id: e8f745c1d20c602ff26b
-    secret: febfad86dc93347f9c1c283dca9003137bf559da
+    secret: 0b1036ff0f43f5399a919252da340628eff99169
   redirect:
     uri:  http://localhost:8887/callback
 spring:
@@ -28,3 +28,8 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+pagehelper:
+  helper-dialect: mysql
+  params: count=countSql
+  reasonable: true
+  support-methods-arguments: true

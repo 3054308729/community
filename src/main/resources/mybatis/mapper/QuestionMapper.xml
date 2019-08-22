@@ -4,7 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="life.majiang.community.mapper.QuestionMapper">
     <insert id="create">
-        insert into `question` (`title`,`description`,`gmt_create`,`gmt_modified`,`creator`,`comment_count`,`view_count`,`like_count`,`tag`)
-        VALUES (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag})
+        insert into `question` (`title`,`description`,`gmt_create`,`gmt_modified`,`creator`,`comment_count`,`view_count`,`like_count`,`tag`,`avatar_url`)
+        VALUES (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag},#{avatarUrl})
     </insert>
+    <select id="list" resultType="life.majiang.community.entity.Question">
+        select * from question limit #{offset},#{size}
+    </select>
+
+    <select id="listByUserId" resultType="life.majiang.community.entity.Question">
+        select * from question where creator = #{userId} limit #{offset},#{size}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(1) from question
+    </select>
+
+    <select id="countByUserId" resultType="int">
+        select count(1) from question where creator = #{userId}
+    </select>
+
+    <select id="getById" resultType="life.majiang.community.entity.Question">
+        select * from question where id = #{id}
+    </select>
+
+    <update id="update">
+        update question set title = #{title},description = #{description},gmt_modified = #{gmtModified},tag = #{tag} where id = #{id}
+    </update>
 </mapper>

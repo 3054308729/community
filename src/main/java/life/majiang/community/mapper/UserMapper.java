@@ -8,4 +8,7 @@ import life.majiang.community.entity.User;
 public interface UserMapper {
     void insert(User user);
     User finByToken(String token);
+    User findById(Integer id);
+    User findByAccountId(String accountId);
+    void update(User dbUser);
 }

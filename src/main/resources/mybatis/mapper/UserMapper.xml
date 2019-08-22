@@ -4,11 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="life.majiang.community.mapper.UserMapper">
     <insert id="insert">
-        insert into `user` (`name`,`account_id`,`token`,`gmt_create`,`gmt_modified`)
-        values (#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified})
+        insert into `user` (`name`,`account_id`,`token`,`gmt_create`,`gmt_modified`,`bio`,`avatar_url`)
+        values (#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified},#{bio},#{avatarUrl})
     </insert>
 
     <select id="finByToken" resultType="life.majiang.community.entity.User">
         select * from user where token = #{token}
+    </select>
+
+    <select id="findById" resultType="life.majiang.community.entity.User">
+        select * from user where id = #{id}
+    </select>
+
+    <update id="update">
+        update `user` set `name` = #{name},`token` = #{token},`gmt_modified` = #{gmtModified},`avatar_url` = #{avatarUrl} where id = #{id}
+    </update>
+
+    <select id="findByAccountId" resultType="life.majiang.community.entity.User">
+        select * from user where account_id = #{accountId}
     </select>
 </mapper>
