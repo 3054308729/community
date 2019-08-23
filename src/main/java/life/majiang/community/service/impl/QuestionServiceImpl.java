@@ -28,8 +28,8 @@ public class QuestionServiceImpl implements QuestionService {
     private UserMapper userMapper;
 
     @Override
-    public void create(Question question) {
-        questionMapper.create(question);
+    public int insert(Question question) {
+        return questionMapper.insert(question);
     }
 
     //显示首页分页
@@ -54,10 +54,10 @@ public class QuestionServiceImpl implements QuestionService {
         paginationDTO.setPagination(totalPage,pn);
 
         Integer offset = size * (pn - 1);
-        List<Question> questions = questionMapper.list(offset,size);
+        List<Question> questions = questionMapper.selectAll(offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<QuestionDTO>();
         for ( Question question : questions ){
-            User user =  userMapper.findById(question.getCreator());
+            User user =  userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();//复制对象
             BeanUtils.copyProperties(question,questionDTO);
             questionDTO.setUser(user);
@@ -91,10 +91,10 @@ public class QuestionServiceImpl implements QuestionService {
         paginationDTO.setPagination(totalPage,pn);
 
         Integer offset = size * (pn - 1);
-        List<Question> questions = questionMapper.listByUserId(userId,offset,size);
+        List<Question> questions = questionMapper.selectAllById(userId,offset,size);
         List<QuestionDTO> questionDTOList = new ArrayList<QuestionDTO>();
         for ( Question question : questions ){
-            User user =  userMapper.findById(question.getCreator());
+            User user =  userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();//复制对象
             BeanUtils.copyProperties(question,questionDTO);
             questionDTO.setUser(user);
@@ -107,10 +107,10 @@ public class QuestionServiceImpl implements QuestionService {
     //显示问题详情
     @Override
     public QuestionDTO getById(Integer id) {
-        Question question = questionMapper.getById(id);
+        Question question = questionMapper.selectByPrimaryKey(id);
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
-        User user =  userMapper.findById(question.getCreator());
+        User user =  userMapper.selectByPrimaryKey(question.getCreator());
         questionDTO.setUser(user);
         return questionDTO;
     }
@@ -120,10 +120,10 @@ public class QuestionServiceImpl implements QuestionService {
         if(question.getId() == null){
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.create(question);
+            questionMapper.insert(question);
         }else {
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.update(question);
+            questionMapper.updateByPrimaryKey(question);
         }
     }
 }

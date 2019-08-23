@@ -9,7 +9,7 @@ import life.majiang.community.entity.Question;
  * Created by hp on 2019/8/19 18:33
  */
 public interface QuestionService {
-    void create(Question question);
+    int insert(Question record);
     PaginationDTO<QuestionDTO> list(Integer pn, Integer size);
     PaginationDTO<QuestionDTO> list(Integer userId, Integer pn, Integer size);
     QuestionDTO getById(Integer id);

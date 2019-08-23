@@ -15,20 +15,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Override
-    public void insert(User user) {
-        userMapper.insert(user);
-    }
 
     @Override
     public User finByToken(String token) {
         return userMapper.finByToken(token);
     }
 
-    @Override
-    public User findById(Integer id) {
-        return userMapper.findById(id);
-    }
 
     //校验用户是否存在
     @Override
@@ -47,7 +39,7 @@ public class UserServiceImpl implements UserService {
             dbUser.setAvatarUrl(user.getAvatarUrl());
             dbUser.setName(user.getName());
             dbUser.setToken(user.getToken());
-            userMapper.update(dbUser);
+            userMapper.updateByPrimaryKey(dbUser);
         }
     }
 }

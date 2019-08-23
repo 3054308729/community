@@ -28,6 +28,7 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: life.majinag.community.entity
 pagehelper:
   helper-dialect: mysql
   params: count=countSql

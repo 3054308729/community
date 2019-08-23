@@ -1,14 +1,21 @@
 package life.majiang.community.mapper;
 
+import java.util.List;
 import life.majiang.community.entity.User;
 
-/**
- * Created by hp on 2019/8/19 9:59
- */
 public interface UserMapper {
-    void insert(User user);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(User user);
+
+    User selectByPrimaryKey(Integer id);
+
+    List<User> selectAll();
+
+    int updateByPrimaryKey(User record);
+
     User finByToken(String token);
-    User findById(Integer id);
+
     User findByAccountId(String accountId);
-    void update(User dbUser);
 }
