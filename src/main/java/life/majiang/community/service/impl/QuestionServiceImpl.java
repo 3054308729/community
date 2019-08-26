@@ -4,10 +4,11 @@ import life.majiang.community.dto.PaginationDTO;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.entity.Question;
 import life.majiang.community.entity.User;
+import life.majiang.community.exception.CustomizeErrorCode;
+import life.majiang.community.exception.CustomizeException;
 import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.service.QuestionService;
-import life.majiang.community.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,6 +109,9 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.selectByPrimaryKey(id);
+        if (question == null){
+            throw  new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
         User user =  userMapper.selectByPrimaryKey(question.getCreator());
@@ -123,7 +127,10 @@ public class QuestionServiceImpl implements QuestionService {
             questionMapper.insert(question);
         }else {
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.updateByPrimaryKey(question);
+            int updated = questionMapper.updateByPrimaryKey(question);
+            if (updated != 1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 }
