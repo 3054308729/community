@@ -20,4 +20,8 @@ public interface QuestionMapper {
     Integer countByUserId(Integer userId);
 
     int updateByPrimaryKey(Question record);
+
+    int updateViewCount(Integer id);
+
+    int updateCommentCount(Question question);//评论数
 }

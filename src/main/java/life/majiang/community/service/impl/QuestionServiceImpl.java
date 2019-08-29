@@ -133,4 +133,9 @@ public class QuestionServiceImpl implements QuestionService {
             }
         }
     }
+
+    @Override
+    public void updateViewCount(Integer id) {
+        questionMapper.updateViewCount(id);
+    }
 }

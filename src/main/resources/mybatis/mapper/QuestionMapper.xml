@@ -97,4 +97,12 @@
         select count(1) from question where creator = #{userId}
     </select>
 
+    <!-- 回复数 -->
+    <update id="updateViewCount" parameterType="life.majiang.community.entity.Question">
+        update question set view_count = view_count + 1 where id = #{id}
+    </update>
+
+    <update id="updateCommentCount" parameterType="life.majiang.community.entity.Question">
+        update question set comment_count = comment_count + #{commentCount} where id = #{id}
+    </update>
 </mapper>
