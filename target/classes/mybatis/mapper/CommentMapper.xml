@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="life.majiang.community.mapper.CommentMapper">
+
+  <resultMap id="BaseResultMap" type="life.majiang.community.entity.Comment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="commentator" jdbcType="INTEGER" property="commentator" />
+    <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="content" jdbcType="INTEGER" property="content" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, parent_id, `type`, commentator, gmt_create, gmt_modified, like_count, content
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="life.majiang.community.entity.Comment">
+    insert into comment (id, parent_id, type, 
+      commentator, gmt_create, gmt_modified, 
+      like_count, content)
+    values (#{id}, #{parentId}, #{type},
+      #{commentator}, #{gmtCreate}, #{gmtModified},
+      #{likeCount}, #{content})
+  </insert>
+  <insert id="insertSelective" parameterType="life.majiang.community.entity.Comment">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="commentator != null">
+        commentator,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="parentId != null">
+        #{parentId},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="commentator != null">
+        #{commentator},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount},
+      </if>
+      <if test="content != null">
+        #{content},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="life.majiang.community.entity.Comment">
+    update comment
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId},
+      </if>
+      <if test="type != null">
+        type = #{type},
+      </if>
+      <if test="commentator != null">
+        commentator = #{commentator},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount},
+      </if>
+      <if test="content != null">
+        content = #{content},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="life.majiang.community.entity.Comment">
+    update comment
+    set parent_id = #{parentId},
+      type = #{type},
+      commentator = #{commentator},
+      gmt_create = #{gmtCreate},
+      gmt_modified = #{gmtModified},
+      like_count = #{likeCount},
+      content = #{content}
+    where id = #{id}
+  </update>
+
+  <select id="selectAllById" parameterType="life.majiang.community.dto.CommentDTO"
+          resultType="life.majiang.community.entity.Comment">
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where parent_id = #{id} and `type` = #{type}
+  </select>
+</mapper>

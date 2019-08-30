@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>错误提示页面</title>
+    <div th:insert="head :: heads"></div>
+</head>
+<body>
+    <div th:insert="navigation :: nav"></div>
+        <div class="jumbotron" align="center">
+          <h1>出错了</h1>
+          <p th:text="${message}"></p>
+          <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>
+        </div>
+</body>
+</html>
