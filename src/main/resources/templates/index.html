@@ -4,6 +4,15 @@
     <title>九歌论坛</title>
     <div th:insert="head :: heads"></div>
 </head>
+<script type="application/javascript">
+    window.onload = function () {
+        var closable = window.localStorage.getItem("closable");
+        if (closable == "true"){
+            window.close();
+            window.localStorage.removeItem("closable");
+        }
+     }
+</script>
 <body>
     <div th:insert="navigation :: nav"></div>
     <div class="container-fluid main">
@@ -14,7 +23,7 @@
                 <div class="media" th:each="p : ${pagination.questions}">
                   <div class="media-left">
                     <a href="#">
-                      <img class="img-circle" th:src="${p.user.avatarUrl}" src="">
+                      <img class="media-object img-rounded" th:src="${p.user.avatarUrl}" src="">
                       <!--https://avatars1.githubusercontent.com/u/47939537?v=4-->
                     </a>
                   </div>
@@ -23,7 +32,7 @@
                         <a th:href="@{'question/'+ ${p.id}}" th:text="${p.title}"></a>
                     </h4>
                     <span th:text="${p.description}"></span><br/>
-                    <span class="text-desc"><span th:text="${p.commentCount}"></span>个回复 <span th:text="${p.viewCount}"></span>次浏览· <span th:text="${#dates.format(p.user.gmtCreate,'yyyy-MM-dd HH:mm:ss')}"></span></span>
+                    <span class="text-desc"><span th:text="${p.commentCount}"></span>个回复 <span th:text="${p.viewCount}"></span>次浏览· <span th:text="${#dates.format(p.gmtCreate,'yyyy-MM-dd HH:mm:ss')}"></span></span>
                   </div>
                 </div>
 

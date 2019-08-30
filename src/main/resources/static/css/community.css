@@ -9,10 +9,6 @@ body{
     float: right;
     margin-bottom: 15px;
 }
-.img-circle{
-    width: 38px;
-    height: 38px;
-}
 .text-desc{
     font-size: 12px;
     font-weight: normal;
@@ -24,7 +20,43 @@ body{
 .community-menu{
     color: #999;
     font-size: 13px;
+    display: block;
+    margin-bottom: 15px;
 }
 .jumbotron{
     margin: 200px auto;
+}
+.media-object{
+    width: 38px;
+    height: 38px;
+}
+.media-body{
+    padding-top:  10px;
+}
+.comment{
+    margin: 10px 0px;
+}
+.btn-comment{
+    float: right;
+    margin-bottom: 10px;
+}
+.comments{
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eeeeee;
+ }
+.comment-sp{
+    margin-top: 0px;
+}
+.menu{
+    color: #999;
+    margin-top: 10px;
+}
+.menu .icon{
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.menu .icon:hover{
+    color: #499ef3;
 }

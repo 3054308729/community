@@ -82,4 +82,12 @@
     <select id="findByAccountId" resultType="life.majiang.community.entity.User">
         select * from user where account_id = #{accountId}
     </select>
+
+    <select id="selectAllUserId" resultType="life.majiang.community.entity.User">
+       select * from user where id in(
+        <foreach item="item" index="index" collection="ids" separator=",">
+          #{item}
+        </foreach>
+       )
+    </select>
 </mapper>

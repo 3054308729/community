@@ -2,6 +2,7 @@ package life.majiang.community.mapper;
 
 import java.util.List;
 import life.majiang.community.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
 
@@ -18,4 +19,7 @@ public interface UserMapper {
     User finByToken(String token);
 
     User findByAccountId(String accountId);
+
+    //查询所有的评论人
+    List<User> selectAllUserId(@Param("ids") List<Integer> ids);
 }
