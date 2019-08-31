@@ -11,10 +11,11 @@
     <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified" />
     <result column="like_count" jdbcType="INTEGER" property="likeCount" />
     <result column="content" jdbcType="INTEGER" property="content" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, parent_id, `type`, commentator, gmt_create, gmt_modified, like_count, content
+    id, parent_id, `type`, commentator, gmt_create, gmt_modified, like_count, content,comment_count
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -136,5 +137,6 @@
     <include refid="Base_Column_List" />
     from comment
     where parent_id = #{id} and `type` = #{type}
+    order by gmt_create desc
   </select>
 </mapper>

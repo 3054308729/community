@@ -2,6 +2,7 @@ package life.majiang.community.service;
 
 import life.majiang.community.dto.CommentDTO;
 import life.majiang.community.entity.Comment;
+import life.majiang.community.enums.CommentTypeEnum;
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface CommentService {
 
     int updateByPrimaryKey(Comment comment);
 
-    List<CommentDTO> listByQuestionId(Integer id);
+    List<CommentDTO> listByTargetId(Integer id, CommentTypeEnum type);
 }

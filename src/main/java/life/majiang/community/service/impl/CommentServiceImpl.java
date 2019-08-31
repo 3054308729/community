@@ -7,6 +7,7 @@ import life.majiang.community.entity.User;
 import life.majiang.community.enums.CommentTypeEnum;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
+import life.majiang.community.mapper.CommentExtMapper;
 import life.majiang.community.mapper.CommentMapper;
 import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
@@ -36,6 +37,9 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private CommentExtMapper commentExtMapper;
+
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return commentMapper.deleteByPrimaryKey(id);
@@ -58,6 +62,11 @@ public class CommentServiceImpl implements CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUNT);//回复评论不存在
             }
             commentMapper.insert(comment);
+            //增加二级评论数
+            Comment parentComment = new Comment();
+            parentComment.setId(comment.getParentId());
+            parentComment.setCommentCount(1);
+            commentExtMapper.updateCommentCount(parentComment);
         }else {
             //回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -91,10 +100,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> listByQuestionId(Integer id) {
+    public List<CommentDTO> listByTargetId(Integer id, CommentTypeEnum type) {
 
 
-        List<Comment> comments = commentMapper.selectAllById(id, CommentTypeEnum.QUESTION.getType());
+        List<Comment> comments = commentMapper.selectAllById(id, type.getType());
         if (comments.size() == 0){
             return new ArrayList<>();
         }
