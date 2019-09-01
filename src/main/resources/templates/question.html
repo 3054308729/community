@@ -18,7 +18,18 @@
                             阅读数:<span th:text="${question.viewCount}"></span>
                         </span>
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div>
+
+
+
+                    <script type="text/javascript">
+                        $(function () {
+                            editormd.markdownToHTML("question-view");
+                        });
+                    </script>
+                    <!-- 内容 -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
+                        <textarea style="display: none;" th:text="${question.description}"></textarea>
+                    </div>
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <!-- 标签 -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -110,7 +121,7 @@
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h4>你今天必定铳大牌</h4>
-                    <img class="img-thumbnail question-wechat" src="/img/6009.png">
+                    <img class="img-thumbnail question-wechat" src="/images/6009.png">
                 </div>
 
                 <!--相关问题 -->
