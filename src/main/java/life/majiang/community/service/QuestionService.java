@@ -4,6 +4,8 @@ import life.majiang.community.dto.PaginationDTO;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.entity.Question;
 
+import java.util.List;
+
 
 /**
  * Created by hp on 2019/8/19 18:33
@@ -17,4 +19,5 @@ public interface QuestionService {
     void createOrUpdate(Question question);
 
     void updateViewCount(Integer id);
+    List<QuestionDTO> selectRelated(QuestionDTO questionDTO);
 }

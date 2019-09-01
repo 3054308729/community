@@ -9,12 +9,16 @@ import life.majiang.community.exception.CustomizeException;
 import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 /**
  * Created by hp on 2019/8/19 18:37
@@ -137,5 +141,27 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void updateViewCount(Integer id) {
         questionMapper.updateViewCount(id);
+    }
+
+    @Override
+    public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
+        if (StringUtils.isBlank(queryDTO.getTag())){
+            return new ArrayList<>();
+        }
+        String[] tags = StringUtils.split(queryDTO.getTag(), ",");
+        String regexpTag = Arrays.stream(tags).collect(Collectors.joining("|"));
+        Question question = new Question();
+        question.setId(queryDTO.getId());
+        question.setTag(regexpTag);
+        List<Question> questions = questionMapper.selectRelated(question);
+        //将question转换成QuestionDTO返回出去
+        List<QuestionDTO> questionDTOS = questions.stream().map(question1 -> {
+            QuestionDTO questionDTO = new QuestionDTO();
+            //赋值
+            BeanUtils.copyProperties(question1,questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+
+        return questionDTOS;
     }
 }

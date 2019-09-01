@@ -31,6 +31,8 @@ public class QuestionController {
 
         QuestionDTO questionDTO = questionService.getById(id);
 
+
+        List<QuestionDTO> relatedQuestion = questionService.selectRelated(questionDTO);
         //获取问题列表
         List<CommentDTO> comments =  commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
 
@@ -38,6 +40,7 @@ public class QuestionController {
         questionService.updateViewCount(id);
         model.addAttribute("question",questionDTO);
         model.addAttribute("comments",comments);
+        model.addAttribute("relatedQuestion",relatedQuestion);
         return "question";
     }
 }
