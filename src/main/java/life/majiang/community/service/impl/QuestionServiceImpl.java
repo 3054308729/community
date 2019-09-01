@@ -8,6 +8,7 @@ import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
 import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
+import life.majiang.community.service.CommentService;
 import life.majiang.community.service.QuestionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +33,8 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private CommentService commentService;
     @Override
     public int insert(Question question) {
         return questionMapper.insert(question);
@@ -132,6 +135,7 @@ public class QuestionServiceImpl implements QuestionService {
         }else {
             question.setGmtModified(question.getGmtCreate());
             int updated = questionMapper.updateByPrimaryKey(question);
+            commentService.deleteByPrimaryKey(question.getId());
             if (updated != 1) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }

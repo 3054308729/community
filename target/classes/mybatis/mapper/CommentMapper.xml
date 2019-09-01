@@ -27,7 +27,7 @@
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment
-    where id = #{id}
+    where parent_id = #{id}
   </delete>
   <insert id="insert" parameterType="life.majiang.community.entity.Comment">
     insert into comment (id, parent_id, type, 

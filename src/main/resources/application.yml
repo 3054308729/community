@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
   #Github登录密匙
 github:
   client:
@@ -12,6 +12,10 @@ ucloud:
   ufile:
     public-key: TOKEN_7bf02df5-103d-472f-ae3a-193f98a52710
     private-key: 75f184e0-03cc-4421-b3d2-6c9d540f3d09
+    bucket-name: jiuge
+    region: cn-bj
+    proxy: ufileos.com
+    expires: 315360000
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/community?serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
