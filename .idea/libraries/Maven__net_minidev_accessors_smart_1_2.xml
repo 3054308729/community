@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: net.minidev:accessors-smart:1.2">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/apache-maven-3.6.0-bin/apache-maven-3.6.0/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/apache-maven-3.6.2-bin/apache-maven-3.6.2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/Downloads/apache-maven-3.6.0-bin/apache-maven-3.6.0/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/apache-maven-3.6.2-bin/apache-maven-3.6.2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/Downloads/apache-maven-3.6.0-bin/apache-maven-3.6.0/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/apache-maven-3.6.2-bin/apache-maven-3.6.2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

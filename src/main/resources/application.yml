@@ -1,12 +1,12 @@
 server:
-  port: 8080
+  port: 8887
   #Github登录密匙
 github:
   client:
     id: e8f745c1d20c602ff26b
-    secret: 0b1036ff0f43f5399a919252da340628eff99169
+    secret: b380845c9a88720feea6746858f5d69bafda0d5c
   redirect:
-    uri:  http://localhost:80/callback
+    uri: http://localhost:8887/callback
   #Ucloud文件操作秘钥
 ucloud:
   ufile:
